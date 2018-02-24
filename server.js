@@ -64,15 +64,16 @@ app.get("/view/waitlist", function(req, res) {
 });
 
 app.post("/api/new", function(req, res) {
+	reservationTrue = 0;
 
 	var newReservation = req.body;
 
 	if (reservations.length < 5) {
-		reservations.push(newReservation)
+		reservations.push(newReservation);
 	}
 
 	else {
-		waitList.push(newReservation)
+		waitList.push(newReservation);
 	}
 
 	res.json(newReservation)
