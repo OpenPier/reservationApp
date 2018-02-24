@@ -10,13 +10,7 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1 class="text-center">
-				<span class="glyphicon glyphicon-fire">
-					
-				</span>
-
-				"Hot Restaurant"
-			</h1>
+			<h1 class="text-center"><span class="glyphicon glyphicon-fire"></span> Hot Restaurant!!</h1>
 			<hr>
 
 			<h2 class="text-center"> Current Reservations and Waiting List</h2>
@@ -63,9 +57,6 @@
 
      
 	<script type="text/javascript">
-	// In this code, jQuery is used to "download" the data from our server
-	// We then dynamically display this content in our table. This is very similar to the group projects you just completed.
-	// It's also very similar to the NYT search application. In fact, I copied a ton of code from there.
 
 	function runTableQuery() {
 		var currentURL = window.location.origin;
@@ -123,19 +114,18 @@
 			})
 	}
 	
-	// This function resets all of the data in our tables. This is intended to let you restart a demo.
 	function clearTable(){
 		var currentURL = window.location.origin;
 		$.ajax({url: currentURL + "/api/clear", method: "POST"})
 	}
-	$("#clear").on('click', function(){
-		alert("Clearing...");
-		clearTable();
-		// Refresh the page after data is cleared
-		location.reload();
-	})
-	// Run Queries!
-	// ==========================================
+
+	// $("#clear").on('click', function(){
+	// 	alert("Clearing...");
+	// 	clearTable();
+		
+	// 	location.reload();
+	// })
+
 	runTableQuery();
 	runWaitListQuery();
 </script>
