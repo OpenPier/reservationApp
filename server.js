@@ -45,26 +45,7 @@ app.get("/api/waitlist", function(req,res) {
 	res.json(waitList)
 })
 
-app.get("/view/tables", function(req, res) {
-
-	for (var i = 0; i < reservations.length; i++) {
-		return res.json(reservations[i])
-    }
-
-    return res.json(false);
-});
-
-app.get("/view/waitlist", function(req, res) {
-
-	for (var i = 0; i < waitList.length; i++) {
-		return res.json(waitList[i])
-    }
-
-    return res.json(false);
-});
-
 app.post("/api/new", function(req, res) {
-	reservationTrue = 0;
 
 	var newReservation = req.body;
 

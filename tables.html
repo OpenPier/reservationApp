@@ -31,7 +31,7 @@
 			</a>
 
 			<a href="/">
-				<button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span>
+				<button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home">Home</span>
 				</button>
 			</a>
 		</div>
@@ -43,7 +43,7 @@
 				<!-- Current Tables in Use -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title">Current Reservations</h4>
+						<h2 class="panel-title">Current Reservations</h2>
 					</div>
 					<div class="panel-body" id="tableSection">
 					</div>
@@ -52,7 +52,7 @@
 				<!-- Waiting List Panel -->
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title">Waiting List</h4>
+						<h2 class="panel-title">Waiting List</h2>
 					</div>
 					<div class="panel-body" id="waitlistSection">
 					</div>
@@ -61,67 +61,68 @@
 		</div>
 
 
-
-     <!-------------------------------------------------------------------->
      
-		<script type="text/javascript">
+	<script type="text/javascript">
 	// In this code, jQuery is used to "download" the data from our server
 	// We then dynamically display this content in our table. This is very similar to the group projects you just completed.
 	// It's also very similar to the NYT search application. In fact, I copied a ton of code from there.
-	function runTableQuery(){
-		// Here we get the location of the root page.
-		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+
+	function runTableQuery() {
 		var currentURL = window.location.origin;
-		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+
 		$.ajax({url: currentURL + "/api/tables", method: "GET"})
-			.done(function(tableData) {
-				// Here we are logging the URL so we have access to it for troubleshooting
-				console.log("------------------------------------");
-				console.log("URL: " + currentURL + "/api/tables");
-				console.log("------------------------------------");
-				// Here we then log the NYTData to console, where it will show up as an object.
-				console.log(tableData);
-				console.log("------------------------------------")
-				// Loop through and display each of the customers
-				for (var i=0; i<tableData.length; i++){
-					// Create the HTML Well (Section) and Add the table content for each reserved table
-					var tableSection = $("<div>");
-					tableSection.addClass('well');
-					tableSection.attr('id', 'tableWell-' + i+1)
-					$('#tableSection').append(tableSection);
-					var tableNumber = i + 1;
-					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+			.done(function(response) {
+				console.log(response)
+
+				for (var i = 0; i < response.length; i ++) {
+					var newDiv = $("<div>");
+					var newPerson = $('<p>');
+					newPerson.html("Reservation name: " + response[i].customerName);
+					var phone = $('<p>');
+					phone.html("Phone number: " + response[i].phoneNumber);
+					var email = $('<p>');
+					email.html("Email: " + response[i].customerEmail);
+					var id = $('<p>');
+					id.html("ID: " + response[i].customerID);
+					newDiv.append("<hr>");
+					newDiv.append(newPerson);
+					newDiv.append(phone);
+					newDiv.append(email);
+					newDiv.append(id);
+					$('#tableSection').append(newDiv);
 				}
-			});
+
+			})
 	}
-	function runWaitListQuery(){
-		// Here we get the location of the root page.
-		// We use this instead of explicitly saying the URL is localhost:3001 because the url will change when we deploy.
+
+	function runWaitListQuery() {
 		var currentURL = window.location.origin;
-		// The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+
 		$.ajax({url: currentURL + "/api/waitlist", method: "GET"})
-			.done(function(waitlistData) {
-				// Here we are logging the URL so we have access to it for troubleshooting
-				console.log("------------------------------------");
-				console.log("URL: " + currentURL + "/api/waitlist");
-				console.log("------------------------------------");
-				// Here we then log the NYTData to console, where it will show up as an object.
-				console.log(waitlistData);
-				console.log("------------------------------------")
-				// Loop through and display each of the customers
-				for (var i=0; i<waitlistData.length; i++){
-					// Create the HTML Well (Section) and Add the table content for each reserved table
-					var waitlistSection = $("<div>");
-					waitlistSection.addClass('well');
-					waitlistSection.attr('id', 'waitlistWell-' + i+1)
-					$('#waitlistSection').append(waitlistSection);
-					var tableNumber = i + 1;
-					// Then display the remaining fields in the HTML (Section Name, Date, URL)
-					$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerID + "</h2>");
+			.done(function(response) {
+				console.log(response)
+
+				for (var i = 0; i < response.length; i ++) {
+					var newDiv = $("<div>");
+					var newPerson = $('<p>');
+					newPerson.html("Reservation name: " + response[i].customerName);
+					var phone = $('<p>');
+					phone.html("Phone number: " + response[i].phoneNumber);
+					var email = $('<p>');
+					email.html("Email: " + response[i].customerEmail);
+					var id = $('<p>');
+					id.html("ID: " + response[i].customerID);
+					newDiv.append("<hr>");
+					newDiv.append(newPerson);
+					newDiv.append(phone);
+					newDiv.append(email);
+					newDiv.append(id);
+					$('#tableSection').append(newDiv);
 				}
-			});
+
+			})
 	}
+	
 	// This function resets all of the data in our tables. This is intended to let you restart a demo.
 	function clearTable(){
 		var currentURL = window.location.origin;
