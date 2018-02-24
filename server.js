@@ -51,13 +51,14 @@ app.post("/api/new", function(req, res) {
 
 	if (reservations.length < 5) {
 		reservations.push(newReservation);
+		res.json([true]);
 	}
 
 	else {
 		waitList.push(newReservation);
+		res.json([false]);
 	}
 
-	res.json(newReservation)
 });
 
 app.listen(PORT, function() {
